@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p> List of available Books</p>
+  {%for book in book_list%}
+    {% if book.is_available%}
+      <ul>
+        <li>{{book.title}}</li>
+        <li>{{book.Author}}</li>
+        <li>SNB: {{book.SNB}}</li>
+        <li>{{book.id}}</li>
+      </ul>
+    {%else%}
+      <p> We are sorry, {{book.title}} is not available at the moment
+        kindly check later
+      </p>
+    {%endif%}
+  {%endfor%}
+  <p>hello</p>
+</body>
+</html>
