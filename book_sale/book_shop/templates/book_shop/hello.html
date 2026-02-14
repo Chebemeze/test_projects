@@ -6,6 +6,7 @@
   <title>Document</title>
 </head>
 <body>
+{%block content%}
   <p> List of available Books</p>
   {%for book in book_list%}
     {% if book.is_available%}
@@ -22,5 +23,6 @@
     {%endif%}
   {%endfor%}
   <p>hello</p>
+{%endblock%}
 </body>
 </html>
