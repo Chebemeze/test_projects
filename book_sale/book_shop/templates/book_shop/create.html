@@ -1,10 +1,12 @@
 {% extends "book_shop/hello.html" %}
 
 {% block content %}
+
 <form method="post">
   {% csrf_token %}
   {{form.as_p}}
   <button>Submit</button>
-  <p><a href= "{% url 'home' %}">Home</a></p>
+  <p><a href= "{% url 'home'  %}">Home</a></p>
 </form>
+
 {% endblock%}
