@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
+from .forms import BookForm
 # Create your views here.
 
 def welcome(request):
@@ -58,3 +59,13 @@ class UpdateBookView(UpdateView):
     return super().get(request, *args, **kwargs)
 
 
+def create(request):
+  if request.method == 'POST':
+    form = BookForm(request.data)
+    if form.is_valid():
+      form.save()
+  
+    return render(request, "book_shop/form.html", form)
+  
+  form = BookForm()
+  return render(request, "book_shop/form.html", {'form': form})

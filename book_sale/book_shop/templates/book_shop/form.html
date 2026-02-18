@@ -1,0 +1,31 @@
+{% extends "book_shop/hello.html" %}
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+  <div class = "field">
+    {{form.title.label_tag}}
+    {{form.title}}
+  </div>
+
+  <div class = "field">
+    {{form.SNB.label_tag}}
+    {{form.SNB}}
+  </div>
+
+  <div class = "field">
+    {{form.Author.label_tag}}
+    {{form.Author}}
+  </div>
+
+  <div class = "field">
+  {{form.is_available.label_tag}}
+  {{form.is_available}}
+  </div>
+  
+  <button>Submit</button>
+  <p><a href= "{% url 'home'  %}">Home</a></p>
+</form>
+
+{% endblock%}

@@ -1,14 +1,14 @@
-from django.forms import forms
+from django import forms
 from .models import Book
 
 
-class BookModel(forms.ModelForm):
+class BookForm(forms.ModelForm):
 
-  class meta:
+  class Meta:
     model = Book
-    fields = ['title', 'SNB', 'Author', 'is-available']
-    widget = {
-      "title": forms.CheckboxInput(attrs={"class":"input"}),
+    fields = ['title', 'SNB', 'Author', 'is_available']
+    widgets = {
+      "title": forms.TextInput(attrs={"class":"input"}),
       "SNB": forms.TextInput(attrs={"class":"input"}),
       "Author": forms.TextInput(attrs={"class":"input"}),
       "is_available": forms.CheckboxInput(attrs={"class":"input"})
