@@ -1,27 +1,32 @@
 {% extends "book_shop/hello.html" %}
+{%load static%}
+
+{% block extra_css%}
+  <link rel="stylesheet" href="{% static 'book_shop/css/style.css' %}" >
+{%endblock%}
 
 {% block content %}
 
-<form method="post">
+<form method="post" class="create-form">
   {% csrf_token %}
   <div class = "field">
-    {{form.title.label_tag}}
+    <span class="label">{{form.title.label_tag}}</span>
     {{form.title}}
   </div>
 
   <div class = "field">
-    {{form.SNB.label_tag}}
+    <span class="label">{{form.SNB.label_tag}}</span>
     {{form.SNB}}
   </div>
 
   <div class = "field">
-    {{form.Author.label_tag}}
+    <span class="label">{{form.Author.label_tag}}</span>
     {{form.Author}}
   </div>
 
   <div class = "field">
-  {{form.is_available.label_tag}}
-  {{form.is_available}}
+    <span class="label">{{form.is_available.label_tag}}</span>
+    {{form.is_available}}
   </div>
   
   <button>Submit</button>
