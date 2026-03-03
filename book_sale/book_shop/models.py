@@ -42,6 +42,8 @@ class Userprofile(models.Model):
   user = models.OneToOneField(User, on_delete= models.CASCADE)
   role = models.CharField(max_length = 100, CHOICES = CHOICES)
 
+# @receiver acts as a signal for autocreating Userprofile whenever a user is created
+# create_userprofile is the function that carries out the creation and saving of UserProfile
 @receiver(post_save, sender=User)
 def create_userprofile(sender, created, instance, **kwargs):
   if created:
