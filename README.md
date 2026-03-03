@@ -5,3 +5,4 @@ It contains application and understanding of
 * Admin customization; fields, fieldsets, custom filters, custom form view,
 display fields, search fields
 * User registration and using custom views such as LoginView, LogoutView, PasswordResetView, PasswordconfirmView, passwordResetDoneView, PasswordResetCompleteView, PasswordChangeView, and PasswordChangeDoneView
+* Implementing role based access control granting users access based on assigned roles. This also uses signals
