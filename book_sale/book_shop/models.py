@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 class Book(models.Model):
@@ -26,3 +29,22 @@ class Product(models.Model):
 
   def __str__(self):
     return self.name
+
+# The following choices belongs to role of the Userprofile class.
+# determines the options of the class
+CHOICES = [
+  ('Admin', 'Admin'),
+  ('student', 'Student'),
+  ('Lecturer', 'Lecturer'),
+]
+
+class Userprofile(models.Model):
+  user = models.OneToOneField(User, on_delete= models.CASCADE)
+  role = models.CharField(max_length = 100, CHOICES = CHOICES)
+
+@receiver(post_save, sender=User)
+def create_userprofile(sender, created, instance, **kwargs):
+  if created:
+    userprofile = Userprofile.objects.create(user=instance)
+    if userprofile:
+      userprofile.save()

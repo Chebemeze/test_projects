@@ -69,3 +69,5 @@ def create(request):
   
   form = BookForm()
   return render(request, "book_shop/form.html", {'form': form})
+
+
