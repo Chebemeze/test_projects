@@ -5,6 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from .forms import BookForm
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 def welcome(request):
@@ -36,6 +39,12 @@ class SignupView(CreateView):
 # you don't have to specify the context_object_name for CreateView
 # and UpdateView because the object name by default is form
 # when using CreatView and UpdateView the fields to modify must be specified in the class
+def isLecturer(user):
+  return(
+    User.userprofile.role == 'Lecturer'
+  )
+
+@user_passes_test(isLecturer)
 class UpdateBookView(UpdateView):
   model = Book
   fields = ('Author', 'title', 'SNB', 'is_available',)
@@ -58,7 +67,12 @@ class UpdateBookView(UpdateView):
       return render (request, 'book_shop/not_found.html', context)
     return super().get(request, *args, **kwargs)
 
+def isAdmin(user):
+  return(
+    User.userprofile.role == 'Admin'
+  )
 
+@user_passes_test(isAdmin)
 def create(request):
   if request.method == 'POST':
     form = BookForm(request.data)
