@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView
+from django.utils.decorators import method_decorator
 from .models import Book
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
@@ -11,7 +12,8 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def welcome(request):
-  return HttpResponse("Welcome to this bookshop")
+  user = request.user
+  return HttpResponse(f"Welcome to this bookshop, {user}")
 
 class HelloView(TemplateView):
   template_name = "book_shop/hello.html"
@@ -41,10 +43,10 @@ class SignupView(CreateView):
 # when using CreatView and UpdateView the fields to modify must be specified in the class
 def isLecturer(user):
   return(
-    User.userprofile.role == 'Lecturer'
+    user.userprofile.role == 'Lecturer'
   )
 
-@user_passes_test(isLecturer)
+@method_decorator(user_passes_test(isLecturer), name='dispatch')
 class UpdateBookView(UpdateView):
   model = Book
   fields = ('Author', 'title', 'SNB', 'is_available',)
@@ -69,7 +71,7 @@ class UpdateBookView(UpdateView):
 
 def isAdmin(user):
   return(
-    User.userprofile.role == 'Admin'
+    user.userprofile.role == 'Admin'
   )
 
 @user_passes_test(isAdmin)

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.contrib import admin
-from book_shop.models import Book, Product
+from book_shop.models import Book, Product, Userprofile
 from django.urls import path, include
 from django.shortcuts import render
 
@@ -108,3 +108,10 @@ admin.site.register(Book, BookAdmin)
 
 # registers the Product model and ProductAdmin that customises it
 admin.site.register(Product, ProductAdmin)
+
+class UserprofileAdmin(admin.ModelAdmin):
+  # readonly_fields = ('role',)
+  pass
+
+# registers the Userprofile model and UserprofileAdmin
+admin.site.register(Userprofile, UserprofileAdmin)
